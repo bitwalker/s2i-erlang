@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cat <<EOF
+This is an Alpine Linux Source2Image base for Elixir:
+To use it, install S2I: https://github.com/openshift/source-to-image
+
+Sample invocation:
+
+s2i build https://github.com/bitwalker/phoenix_example.git bitwalker/s2i-elixir elixir-sample-app
+
+You can then run the resulting image via:
+docker run -p 5000:5000 elixir-sample-app
+EOF

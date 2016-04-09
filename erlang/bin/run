@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# If a user passes --debug, allow them to inspect the image by booting to a bash shell
+# Use it like: docker run -i -t bitwalker/s2i-elixir --debug
+if [ "$1" == "--debug" ]; then
+    exec /bin/bash
+fi
+
+# Runs the Erlang release.
+app_name=$(erl -noshell -eval '[File] = filelib:wildcard("src/*.app.src"), {ok, [{application, AppName, _}]} = file:consult(File), io:fwrite("~s\n", [AppName]), init:stop().')
+./_build/prod/rel/$app_name/bin/$app_name foreground
