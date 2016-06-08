@@ -1,4 +1,4 @@
-FROM bitwalker/s2i-alpine-base:1.0
+FROM bitwalker/s2i-alpine-base:2.0
 
 MAINTAINER Paul Schoenfelder <paulschoenfelder@gmail.com>
 
@@ -9,11 +9,11 @@ ENV \
   PORT=5000 \
   NPM_VERSION=3 \
   NODE_ENV=production \
-  REFRESHED_AT=2016-04-9
+  REFRESHED_AT=2016-06-07
 
 LABEL \
   io.k8s.description="Platform for building and running Erlang applications" \
-  io.k8s.display-name="Erlang v18.3, Node.js v4.4.2" \
+  io.k8s.display-name="Erlang v18.3, Node.js v6.2" \
   io.openshift.expose-services="5000:http,8080:tcp" \
   io.openshift.tags="builder,erlang,erlang-18.3" \
   com.redhat.deployments-dir="$HOME"
@@ -23,7 +23,7 @@ RUN apk add --no-cache --update \
   erlang-stdlib erlang-erts erlang-tools erlang-syntax-tools erlang-sasl \
   erlang-crypto erlang-public-key erlang-ssl erlang-ssh erlang-asn1 erlang-inets \
   erlang-mnesia erlang-odbc erlang-xmerl erlang-erl-interface erlang-parsetools erlang-eunit \
-  nodejs=4.4.2-r0 && \
+  nodejs && \
   wget https://s3.amazonaws.com/rebar3/rebar3 && chmod +x rebar3 && mv rebar3 /usr/bin && \
   npm install npm -g --no-progress && \
   rm -rf /var/cache/apk/*
